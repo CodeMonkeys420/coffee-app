@@ -1,5 +1,7 @@
 {
   "name": "coffee-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
