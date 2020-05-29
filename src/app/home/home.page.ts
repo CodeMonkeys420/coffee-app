@@ -13,7 +13,7 @@ export class HomePage {
 
   go() {
     this.router.navigate(['add-page']);
-    this.router.navigate(['home']);
+    // this.router.navigate(['home']);
   }
 
 }
