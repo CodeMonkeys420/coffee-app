@@ -1,7 +1,7 @@
 <ion-header >
 
 
-  
+ 
   <ion-toolbar style="background-color: white !important;" >
 
     <ion-fab horizontal="start" vertical="top">
@@ -21,7 +21,7 @@
     </ion-title>
 
     <ion-fab horizontal="end" vertical="top">
-      <ion-fab-button size="small" (click)="go()">
+      <ion-fab-button size="small" href="/add-page">
 
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
@@ -42,130 +42,146 @@
   </ion-header>
 
 
-  <ion-card style="background-color: white;">
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-                 <ion-card-title color="primary">CoffeeName</ion-card-title> 
-          </ion-col>
-          <ion-col></ion-col>
-          <ion-col horizontal="end" vertical="top">
-                 <ion-avatar >
-          <img height="70px" width="70px" src="https://cdncloudcart.com/assets/themes/flair/img/defaults/noimage/no-image.png">        
-      </ion-avatar>  
-          </ion-col>
-     
-        </ion-row>
-        <ion-row>
-          <ion-col>
-      <ion-card-subtitle>Coffee ID</ion-card-subtitle>            
-          </ion-col>
+  <div  id="Coffie">    
+    
+  
+  </div>
 
-        </ion-row>
-        <ion-row>
+  
 
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-fab-button>
-
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="trash-outline"></ion-icon>
-            </ion-fab-button>
-
-        </ion-row>
-      </ion-grid>
+ 
 
 
-
-
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card style="background-color: white;">
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-                 <ion-card-title color="primary">CoffeeName</ion-card-title> 
-          </ion-col>
-          <ion-col></ion-col>
-          <ion-col horizontal="end" vertical="top">
-                 <ion-avatar >
-          <img height="70px" width="70px" src="https://cdncloudcart.com/assets/themes/flair/img/defaults/noimage/no-image.png">        
-      </ion-avatar>  
-          </ion-col>
-     
-        </ion-row>
-        <ion-row>
-          <ion-col>
-      <ion-card-subtitle>Coffee ID</ion-card-subtitle>            
-          </ion-col>
-
-        </ion-row>
-        <ion-row>
-
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-fab-button>
-
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="trash-outline"></ion-icon>
-            </ion-fab-button>
-
-        </ion-row>
-      </ion-grid>
-
-
-
-
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card style="background-color: white;">
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-                 <ion-card-title color="primary">CoffeeName</ion-card-title> 
-          </ion-col>
-          <ion-col></ion-col>
-          <ion-col horizontal="end" vertical="top">
-                 <ion-avatar >
-          <img height="70px" width="70px" src="https://cdncloudcart.com/assets/themes/flair/img/defaults/noimage/no-image.png">        
-      </ion-avatar>  
-          </ion-col>
-     
-        </ion-row>
-        <ion-row>
-          <ion-col>
-      <ion-card-subtitle>Coffee ID</ion-card-subtitle>            
-          </ion-col>
-
-        </ion-row>
-        <ion-row>
-
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="create-outline"></ion-icon>
-            </ion-fab-button>
-
-            <ion-fab-button size="small" class="cardbuttons">
-              <ion-icon name="trash-outline"></ion-icon>
-            </ion-fab-button>
-
-        </ion-row>
-      </ion-grid>
-
-
-
-
-    </ion-card-header>
-    <ion-card-content>
-    </ion-card-content>
-  </ion-card>
 
 </ion-content>
+
+
+<script type="text/javascript">
+
+
+
+
+$(document).ready(function () {
+        const showFirestoreDatabase = () => {
+            const db = firebase.firestore();
+            const firestoreEl = jQuery('#Coffie');
+        
+            // You can get the collectionName and documentName from the shortcode attribute
+            const collectionName = 'Flavours';
+            const documentName =[];
+           var ImagePath;
+            db.collection("Flavours").get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+               
+                    documentName.push(doc.id);
+
+                    if (collectionName && doc.id) {
+                        const docRef = db.collection(collectionName).doc(doc.id);
+                    
+                        docRef.get().then(doc => {
+                            if (doc.exists) {
+                               let id= doc.id;
+                               let  html='<ion-card style="background-color: white;">';    
+                               html +='<ion-card-header>'; 
+                               html +=' <ion-grid>'; 
+                               html +=' <ion-row>'; 
+                               html+=' <ion-col>';
+
+
+                                jQuery.each(doc.data(), function (key, value) {
+                                    
+                               
+                               //     html += `<td> ${String(key)} </td>`;
+
+                             
+
+
+                                if(String(key) == 'Name'){
+
+                                  html+='<ion-card-title color="primary">'+value+'</ion-card-title> ';
+
+                                     }                                                                                     
+                                })
+                               
+                          
+                              html+='  </ion-col>';
+                              html+=' <ion-col></ion-col>';
+                              html+='<ion-col horizontal="end" vertical="top">';
+                              html+='<ion-avatar >';
+                              html+='  <img height="70px" width="70px" src="https://cdncloudcart.com/assets/themes/flair/img/defaults/noimage/no-image.png">';
+                              html+='</ion-avatar>  ';
+                              html+=' </ion-col>';
+                              html+=' </ion-row>';
+                              html+=' <ion-row>';
+                              html+='<ion-col>';
+
+                              html+=' <ion-card-subtitle>'+id+'</ion-card-subtitle>    ';
+
+                              html+='</ion-col>';
+                              html+='</ion-row>';
+                              html+='<ion-row>';
+                              html+=' <ion-fab-button size="small" class="cardbuttons" href="/edit-page">';
+                                // edit page net in gesit vir test
+                              html+=' <ion-icon name="create-outline"></ion-icon>';
+                              html+='</ion-fab-button>';
+                              html+='<ion-fab-button size="small" class="cardbuttons" value="'+id+'"  onclick="deleteCofee(value)">';
+                              html+='<ion-icon name="trash-outline"></ion-icon>';
+                              html+=' </ion-fab-button>';
+                              html+='   </ion-row>';
+                              html+=' </ion-grid>';
+                              html+='</ion-card-header>';
+                              html+='<ion-card-content>';
+                              html+='</ion-card-content>';
+                              html+=' </ion-card>';
+              
+                                
+                                firestoreEl.append(html);
+                              
+                               // document.getElementById(id).src = ImagePath;
+                          
+              
+                    
+                            } else {
+                               
+                                console.error('Please check your collection and document name in the [firestore] shortcode!');
+                            }
+                        }).catch(error => {
+                            console.error('Please check your collection and document name in the [firestore] shortcode!', error);
+                        });
+                    } else {
+                        console.warn('Please check your collection and document name in the [firestore] shortcode!');
+                    }
+
+
+                });
+            });
+
+
+
+ 
+
+        }
+        
+        showFirestoreDatabase()
+    })
+
+
+function deleteCofee(value){
+
+let id = value;
+console.log(id);
+
+if (confirm("Are you sure you want to delete this?") == true) {
+    const db = firebase.firestore();
+    db.collection('Flavours').doc(id).delete();
+    location.reload();
+    x = "You pressed OK!";
+} else {
+    x = "You pressed Cancel!";
+}
+
+
+}
+
+
+  </script>

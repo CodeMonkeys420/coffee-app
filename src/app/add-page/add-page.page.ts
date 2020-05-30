@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-page',
@@ -7,14 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-page.page.scss'],
 })
 export class AddPagePage implements OnInit {
-  endodeData: any;
-  scannedData: {};
 
-  constructor() {
-   
-   }
+// store the scanned result
+num: string;
 
-  
+// DI barcodeScanner
+constructor(public navCtrl: NavController, 
+   ) {
+
+}
+
+// new scan method
+// scan() {
+//   this.barcodeScanner.scan().then(data => {
+//       // this is called when a barcode is found
+//       this.num = data.text
+//     });      
+// }
+
   ngOnInit() {
   }
 
