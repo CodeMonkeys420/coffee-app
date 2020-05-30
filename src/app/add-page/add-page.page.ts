@@ -18,6 +18,7 @@ constructor(public navCtrl: NavController,
 
 }
 
+
 // new scan method
 // scan() {
 //   this.barcodeScanner.scan().then(data => {
