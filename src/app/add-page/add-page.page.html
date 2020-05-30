@@ -19,7 +19,7 @@
     </ion-title>
 
     <ion-fab horizontal="end" vertical="top">
-      <ion-fab-button size="small" (click)="goToBarcodeScan()">
+      <ion-fab-button size="small" (click)="scanBar()">
         <ion-icon name="barcode-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
@@ -54,16 +54,16 @@
   </ion-row>
   <ion-row>
     <ion-item class="lines">
-      <ion-input placeholder="FLAVOUR NAME" class="pagetexts" horizontal="50px"></ion-input>
+      <ion-input placeholder="FLAVOUR NAME" id ="FLAVOURNAME" class="pagetexts" horizontal="50px"></ion-input>
     </ion-item>
   </ion-row>
   <ion-row>
     <ion-item class="lines">
-      <ion-input placeholder="PRICE PER BOX" class="pagetexts" horizontal="50px"></ion-input>
+      <ion-input placeholder="PRICE PER BOX"  id="PRICEPERBOX" class="pagetexts" horizontal="50px"></ion-input>
     </ion-item>
     <ion-col>
           <ion-item class="lines">
-      <ion-input placeholder="PRICE PER POD" class="pagetexts2" horizontal="50px"></ion-input>
+      <ion-input placeholder="PRICE PER POD" id="PRICEPERPOD"  class="pagetexts2" horizontal="50px"></ion-input>
     </ion-item>
     </ion-col>
 
@@ -71,7 +71,7 @@
   </ion-row>
   <ion-row>
     <ion-item class="lines">
-      <ion-input placeholder="PODS PER BOX" class="pagetexts" horizontal="50px"></ion-input>
+      <ion-input placeholder="PODS PER BOX" id="PODSPERBOX" class="pagetexts" horizontal="50px"></ion-input>
     </ion-item>
       
 
@@ -85,8 +85,52 @@
 
   </ion-grid>
 
+  <div *ngIf="scannedData">
+    <p>
+      Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+    </p>
+    <p>
+      Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+    </p>
+  </div>
 
+  <h1>Enter Value to Create QR code</h1>
+  <ion-input placeholder="Enter Input" id='Barcode' [(ngModel)]="encodedData"></ion-input>
 
+  <ion-button color="success" (click)="generateBar()">
+    Create QR
+  </ion-button>
+
+  <ion-fab-button class="ion-icon" href="/add-page">
+
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
 
 
 </ion-content>
+
+
+<script>
+let db = admin.firestore();
+
+function addCoffie(){
+
+id=document.getElementById('Barcode').value;
+
+  let data = {
+  Name: document.getElementById('Name').value,
+ // PhotoName: document.getElementById('PhotoName').value,
+  PodsPerBox: document.getElementById('PodsPerBox').value,
+  PricePerBox :document.getElementById('PricePerBox').value,
+  PricePerPod:document.getElementById('PricePerPod').value,
+  Barcode:document.getElementById('Barcode').value
+};
+
+
+let setDoc = db.collection('Flavours').doc(id).set(data);
+ 
+
+}
+
+
+</script>
