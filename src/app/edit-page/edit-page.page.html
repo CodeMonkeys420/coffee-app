@@ -19,7 +19,7 @@
     </ion-title>
 
     <ion-fab horizontal="end" vertical="top">
-      <ion-fab-button size="small" (click)="goToBarcodeScan()">
+      <ion-fab-button size="small" (click)="barcodeDummyScan()">
         <ion-icon name="barcode-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab>
@@ -30,63 +30,87 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="addpageclass2">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-grid class="addpageclass">
+
+  <ion-grid >
   <ion-row col-1>
-    <ion-col>
-  <ion-item class="barcodetop">
-  <ion-input placeholder="BARCODE" class="pagetexts" horizontal="50px"></ion-input>
-  </ion-item>
-    </ion-col>
 
+  <ion-col>
+    <img class="img2" height="100px" width="100px" src=".\assets\risettoIntenso.png">
+  
+    <ion-item class="barcodetop">
+      <ion-input class="pagetexts" >5449000011114</ion-input>
+      </ion-item>
+<ion-item class="lines">
+      <ion-input id ="FLAVOURNAME" class="pagetexts" >Espresso Forte</ion-input>
+    </ion-item>
+<ion-item class="lines">
+      <ion-input  id="PRICEPERBOX" class="pagetexts">$99</ion-input>
+    </ion-item>
+<ion-item class="lines">
+      <ion-input  id="PRICEPERPOD"  class="pagetexts2">$9</ion-input>
+    </ion-item>
+<ion-item class="lines">
+      <ion-input  id="PODSPERBOX" class="pagetexts" >10</ion-input>
+    </ion-item>
 
-  <ion-col class="cameraimg">
-    <img height="70px" width="70px" src="https://cdncloudcart.com/assets/themes/flair/img/defaults/noimage/no-image.png">
-  </ion-col>
-
+</ion-col>
 
 
       
   </ion-row>
-  <ion-row>
-    <ion-item class="lines">
-      <ion-input placeholder="FLAVOUR NAME" class="pagetexts" horizontal="50px"></ion-input>
-    </ion-item>
-  </ion-row>
-  <ion-row>
-    <ion-item class="lines">
-      <ion-input placeholder="PRICE PER BOX" class="pagetexts" horizontal="50px"></ion-input>
-    </ion-item>
-    <ion-col>
-          <ion-item class="lines">
-      <ion-input placeholder="PRICE PER POD" class="pagetexts2" horizontal="50px"></ion-input>
-    </ion-item>
-    </ion-col>
 
-      
-  </ion-row>
-  <ion-row>
-    <ion-item class="lines">
-      <ion-input placeholder="PODS PER BOX" class="pagetexts" horizontal="50px"></ion-input>
-    </ion-item>
-      
-
-  </ion-row>
-  <ion-row>
-
-  </ion-row>
   <div style="background-color: #8A4B38;">
 
   </div>
 
   </ion-grid>
 
+  <!-- <div *ngIf="scannedData">
+    <p>
+      Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+    </p>
+    <p>
+      Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+    </p>
+  </div>
 
+  <h1>Enter Value to Create QR code</h1>
+  <ion-input placeholder="Enter Input" id='Barcode' [(ngModel)]="encodedData"></ion-input>
 
+  <ion-button color="success" (click)="generateBar()">
+    Create QR
+  </ion-button> -->
+
+  <ion-fab-button class="ion-icon" href=".\home">
+
+    <ion-icon name="checkmark-outline"></ion-icon>
+  </ion-fab-button>
 
 
 </ion-content>
+
+
+<script>
+let db = admin.firestore();
+
+function addCoffie(){
+window.alert("btn werk");
+id=document.getElementById('Barcode').value;
+
+  let data = {
+  Name: document.getElementById('Name').value,
+ // PhotoName: document.getElementById('PhotoName').value,
+  PodsPerBox: document.getElementById('PodsPerBox').value,
+  PricePerBox :document.getElementById('PricePerBox').value,
+  PricePerPod:document.getElementById('PricePerPod').value,
+  Barcode:document.getElementById('Barcode').value
+};
+
+
+let setDoc = db.collection('Flavours').doc(id).set(data);
+ 
+
+}
+
+
+</script>
