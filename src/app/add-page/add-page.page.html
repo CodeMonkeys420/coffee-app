@@ -85,7 +85,7 @@
 
   </ion-grid>
 
-  <div *ngIf="scannedData">
+  <!-- <div *ngIf="scannedData">
     <p>
       Scanned Code Text : <b>{{ scannedData["text"] }}</b>
     </p>
@@ -99,11 +99,11 @@
 
   <ion-button color="success" (click)="generateBar()">
     Create QR
-  </ion-button>
+  </ion-button> -->
 
-  <ion-fab-button class="ion-icon" href="/add-page">
+  <ion-fab-button class="ion-icon" (click)="addCoffie()">
 
-    <ion-icon name="add"></ion-icon>
+    <ion-icon name="checkmark-outline"></ion-icon>
   </ion-fab-button>
 
 
@@ -114,7 +114,7 @@
 let db = admin.firestore();
 
 function addCoffie(){
-
+window.alert("btn werk");
 id=document.getElementById('Barcode').value;
 
   let data = {
